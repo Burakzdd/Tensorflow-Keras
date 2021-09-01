@@ -20,7 +20,7 @@ veri_adresi = '/home/burakzdd/Desktop/cats_and_dogs_filtered'
 train_veri = os.path.join(veri_adresi, 'train')
 validation_veri = os.path.join(veri_adresi, 'validation')
 ```
-## Model Oluşturma 
+## **Model Oluşturma** 
 Verilerin özelliklerini çıkarabilmemize yarayacak olan katmanlarımızı inşaa ediyoruz.
 ```
 model = tf.keras.models.Sequential([
@@ -43,7 +43,7 @@ Bu katman belirlenen boyuttaki bir filtreyi görsel üzerinde gezdirerek görün
 Havuzlama işlemi yapan bu katman görselin özelliklerini koruyarak tamamen boyutunu yarıya düşürmektedir.
 
 ### Flatten Katmanı
-Bu katman görseli düzleştirmektedir. Yani tek boyutlu bir dizi haline çevirmektedir.
+Bu katman modeli düzleştirmektedir. Yani tek boyutlu bir dizi haline çevirmektedir.
 
 ### Dense
 Bu katman ise ağımıza nöronlar ekleyerek ağı daha karmaşık hale getirmektedir. Bu da ağımızın daha güçlü olmasını sağlamaktadır. Örneğin burada katmanlar arasına 512 tane nöron eklemiş olduk.
@@ -61,4 +61,29 @@ model.summary()
 Modeli derleme işlemi ise aşağıdaki kod ile gerçekleştrilmektedir. Burada ikili sınıflandırma yapılacağı için kayıp fonskiyonu binary_crossentropy olarak belirlenmiştir.
 ```
 model.compile(optimizer=RMSprop(lr=0.001),loss= 'binary_crossentropy',metrics=['accuracy'])
+```
+## Eğitim
+Eğitime geçmeden önce tüm görselleri normalleştirmemiz gerekmektedir bu işlem ImageDataGenerator fonksiyonu ile kolaylıkla gereçkeleştirebilmektedir. Aşağıda görüldüğü  gibi fonksiyon içinde görseli 1/255 boyutlarında yeniden şekillendirilmektedir.
+```
+train_datagen = ImageDataGenerator(rescale=1.0/255. )
+validation_datagen = ImageDataGenerator(rescale=1.0/255. )
+```
+Daha sonra veriler tamamiyle eğitime hazır hale getirilmektedir. Burada batch_size tek seferde kaç görselin eğtime gireceğini ifade etmektedir. class_mode='binary' olarak işaretlendiği kısımda ise sınıflandırmanın ikili sınıflandırma olarak yapılacağını, target_size ise görselin giriş görüntüsünü ifade etmektedir.
+```
+train_generator = train_datagen.flow_from_directory(train_veri,batch_size=20, class_mode='binary',target_size=(150,150))
+validation_generator = validation_datagen.flow_from_directory(validation_veri, batch_size=20, class_mode='binary', target_size=(150,150))
+```
+Bu işlem de tamamalndıktan sorna eğitime başlanabilir. Burada ilk iki paremetreye hazırlanan verilerimizi, daha sonra ise adım sayıları girilmektedir. Son paramterede yer alan verbose'u yazmak zorunda değilsiniz. Eğer yazmazsanız bu 1 olarak belirlenmiştir. 2 olarak belirlendiğinde sadece eğitim sırasında uzun uzun epochs'un % si görülmemektedir
+```
+model.fit(train_generator,
+        validation_data=validation_generator,
+        steps_per_epoch=100, 
+        epochs=15, 
+        validation_steps=50, 
+        verbose=2)
+```
+# Modeli Kaydetme
+Modelin eğitildikten sonra kaybolmaması için kaydedilmesi gerekmektedir. Bu işlem .save komutu ile kolaylıkla yapılabilmektedir. İşlem sonunda model bilgisayarınıza belirlediğiniz isim ile kaydolmaktadır.
+```
+model.save('cat_dog_model.h5')
 ```
