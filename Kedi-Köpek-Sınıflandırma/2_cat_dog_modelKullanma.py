@@ -8,7 +8,7 @@ img2 = tf.keras.preprocessing.image.load_img(
     "/home/burakzdd/Desktop/cats_and_dogs_filtered/validation/cats/cat.2010.jpg", target_size=(150,150)
 )
 img_array = tf.keras.preprocessing.image.img_to_array(img2)
-img_array = tf.expand_dims(img_array, 0)  # Create batch axis
+img_array = tf.expand_dims(img_array, 0) 
 classes = model.predict(img_array)
 if classes[0]>0:
     print("This is a dog")
