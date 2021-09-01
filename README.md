@@ -7,7 +7,8 @@ Keras ise Tensorflow 2 nin üst düzey API’sidir (Uygulama Programlama Arayüz
 # Tensorflow ile bir kedi köpek sınıflandırıcısı
 !!Bu repoda ki kedi-köpek-sınıflandırma dosyası içersinde kodlar mevcuttur.
 İlk olarak kedi ve köpek görsellerinden oluşan veri setine sahip olmamız gerekmektedir. Bu çalışma da kaggle üzerindeki kedi köpek veri seti ile çalışılmıştır. Bu verisetine bu adresten ulaşabilirsiniz ya da aşağıdaki kod ile terminal üzerinden indirebilirsiniz.
-'''wget --no-check-certificate https://storage.googleapis.com/mledu-datasets/cats_and_dogs_filtered.zip
+'''
+wget --no-check-certificate https://storage.googleapis.com/mledu-datasets/cats_and_dogs_filtered.zip
 '''
 Veri setini incelediğimiz de kullanıma hazır şekilde train ve validation olarak ayrılmış şekilde olup aynı zamanda bu klasörlerde kendi için cats ve dogs diye ayrılmaktadır. Yani elde bulunan veriler tamamen kullanıma hazırdır.
 
