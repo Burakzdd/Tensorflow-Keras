@@ -4,8 +4,7 @@ Tensorflow Architecture and Classification Examples (Tensorflow Mimarisi ve Sın
 Tensorflow, yapay zekanın derin öğrenme çalışmaları yapan geliştiriciler için üretilmiş açık kaynaklı bir kütüphanedir. Sistem özelinde verilen verilerin kodlanması ve ayırt edilmeleri sağlanmaktadır. Her ne kadar Deep Learning uygulamaları bünyesinde kullanımı görülse de TensorFlow başlıca çok daha geniş bir alanı kapsamına almaktadır.
 Keras ise Tensorflow 2 nin üst düzey API’sidir (Uygulama Programlama Arayüzü). Keras, python’da yazılmış açık kaynaklı bir sinir ağı kütüphanesidir. Keras, tensorflow için bir arabirim görevi görür. CNN ve ANN gibi ağlar ile hızlı deneyler sağlamak için tasarlanmıştır.
 Some basic Git commands are:
-```
-```
+
 # Tensorflow ile bir kedi köpek sınıflandırıcısı
 !!Bu repoda ki kedi-köpek-sınıflandırma dosyası içersinde kodlar mevcuttur.
 İlk olarak kedi ve köpek görsellerinden oluşan veri setine sahip olmamız gerekmektedir. Bu çalışma da kaggle üzerindeki kedi köpek veri seti ile çalışılmıştır. Bu verisetine bu adresten ulaşabilirsiniz ya da aşağıdaki kod ile terminal üzerinden indirebilirsiniz.
@@ -23,7 +22,8 @@ validation_veri = os.path.join(veri_adresi, 'validation')
 ```
 ## Model Oluşturma 
 Verilerin özelliklerini çıkarabilmemize yarayacak olan katmanlarımızı inşaa ediyoruz.
-```model = tf.keras.models.Sequential([
+```
+model = tf.keras.models.Sequential([
     tf.keras.layers.Conv2D(16,(3,3), activation='relu', input_shape = (150,150,3)),
     tf.keras.layers.MaxPooling2D(2,2),
     tf.keras.layers.Conv2D(32,(3,3), activation='relu'),
