@@ -82,8 +82,37 @@ model.fit(train_generator,
         validation_steps=50, 
         verbose=2)
 ```
-# Modeli Kaydetme
-Modelin eğitildikten sonra kaybolmaması için kaydedilmesi gerekmektedir. Bu işlem .save komutu ile kolaylıkla yapılabilmektedir. İşlem sonunda model bilgisayarınıza belirlediğiniz isim ile kaydolmaktadır.
+## Modeli Kaydetme
+Modelin eğitildikten sonra kaybolmaması için kaydedilmesi gerekmektedir. Bu işlem .save komutu ile kolaylıkla yapılabilmektedir. İşlem sonunda .h5 uzantılı model bilgisayarınıza belirlediğiniz isim ile kaydolmaktadır.
 ```
 model.save('cat_dog_model.h5')
+```
+
+## Modeli Kullanma
+Kayıtlı olan bir model kod içerisinde yüklenerek tekrardan kullanılmaktadır. Bu işlem aşağıdaki load_model komutu ile yapılmaktadır. Parantez içirisine modelin kayıtlı olduğu dizinin adresi girilmelidir.
+```
+model = tf.keras.models.load_model('/home/burakzdd/cat_dog_model.h5')
+```
+## Test Etme
+Yapılan modelin test aşamasına geçmeden önce sınıflandırılacak görüntü hazır hale getirilmelidir. Aşağıdaki koda bakacak olursak ilk olarak daha sonra bastırmak için görsel okundu. Görselin tekrardan okunduğu esas kısımda ise görsel ön işlemden geçirilmektedir. Burda görüntü 150,150 boyutlarına düşürülmektedir. Daha sonra dizi formuna çevrilmektedir.
+```
+img = cv2.imread("/home/burakzdd/Desktop/cats_and_dogs_filtered/validation/cats/cat.2010.jpg")
+img2 = tf.keras.preprocessing.image.load_img(
+    "/home/burakzdd/Desktop/cats_and_dogs_filtered/validation/cats/cat.2010.jpg", target_size=(150,150)
+)
+img_array = tf.keras.preprocessing.image.img_to_array(img2)
+img_array = tf.expand_dims(img_array, 0)  # Create batch axis
+```
+Ön işlemler bittikten sonra model tahmin işlemine gönderilerek görselin sınıf tahmini yapılmaktadır.
+```
+classes = model.predict(img_array)
+```
+Yapılan sınıf tahmininin çıktısına aşağıdaki gibi ulaşılabilmektedir. İkili sigmoid sınıflandırması yapıldığı için eğer tahmin değeri sıfırdan büyükse görsel ilk sınafa, sıfırdan küçükse ikinci sınıfa aittir. Burada ayrıca ilk başta okunan görselin üzerine sınıf etiketi de bastırılarak sınıflandırma güzel bir şekilde gözlemlenmektedir.
+```
+if classes[0]>0:
+    print("Bu bir köpektir")
+    cv2.putText(img, "kopek",(10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 255), 3)
+else:
+    print("Bu bir kedidir")
+    cv2.putText(img, "Kedi",(10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 255), 3)
 ```
