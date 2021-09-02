@@ -7,7 +7,7 @@ Some basic Git commands are:
 
 # Tensorflow ile bir kedi köpek sınıflandırıcısı
 !!Bu repoda ki kedi-köpek-sınıflandırma dosyası içersinde kodlar mevcuttur.
-İlk olarak kedi ve köpek görsellerinden oluşan veri setine sahip olmamız gerekmektedir. Bu çalışma da kaggle üzerindeki kedi köpek veri seti ile çalışılmıştır. Bu verisetine bu adresten ulaşabilirsiniz ya da aşağıdaki kod ile terminal üzerinden indirebilirsiniz.
+İlk olarak kedi ve köpek görsellerinden oluşan veri setine sahip olmamız gerekmektedir. Bu çalışma da kaggle üzerindeki kedi köpek veri seti ile çalışılmıştır. Bu veri setine bu adresten https://www.kaggle.com/c/dogs-vs-cats ulaşabilirsiniz ya da aşağıdaki kod ile terminal üzerinden indirebilirsiniz.
 ```
 wget --no-check-certificate https://storage.googleapis.com/mledu-datasets/cats_and_dogs_filtered.zip
 ```
