@@ -62,6 +62,7 @@ Modeli derleme işlemi ise aşağıdaki kod ile gerçekleştrilmektedir. Burada 
 ```
 model.compile(optimizer=RMSprop(lr=0.001),loss= 'binary_crossentropy',metrics=['accuracy'])
 ```
+![alt text](https://github.com/Burakzdd/Tensorflow-Keras/blob/main/g%C3%B6rseller/modelSummary.png)
 ## Eğitim
 Eğitime geçmeden önce tüm görselleri normalleştirmemiz gerekmektedir bu işlem ImageDataGenerator fonksiyonu ile kolaylıkla gereçkeleştirebilmektedir. Aşağıda görüldüğü  gibi fonksiyon içinde görseli 1/255 boyutlarında yeniden şekillendirilmektedir.
 ```
@@ -87,7 +88,7 @@ Modelin eğitildikten sonra kaybolmaması için kaydedilmesi gerekmektedir. Bu i
 ```
 model.save('cat_dog_model.h5')
 ```
-
+![alt text](https://github.com/Burakzdd/Tensorflow-Keras/blob/main/g%C3%B6rseller/modelsave.png)
 ## Modeli Kullanma
 Kayıtlı olan bir model kod içerisinde yüklenerek tekrardan kullanılmaktadır. Bu işlem aşağıdaki load_model komutu ile yapılmaktadır. Parantez içirisine modelin kayıtlı olduğu dizinin adresi girilmelidir.
 ```
@@ -116,3 +117,5 @@ else:
     print("Bu bir kedidir")
     cv2.putText(img, "Kedi",(10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 255), 3)
 ```
+![alt text](https://github.com/Burakzdd/Tensorflow-Keras/blob/main/g%C3%B6rseller/kopek.png)
+![alt text](https://github.com/Burakzdd/Tensorflow-Keras/blob/main/g%C3%B6rseller/kedi.png)
